@@ -1,6 +1,8 @@
+
+
 #include <stdio.h>
 
-#define MAX_DIGITS 500 // número máximo de dígitos para armazenar o fatorial
+#define MAX_DIGITS 90000 // número máximo de dígitos para armazenar o fatorial
 
 int main() {
     int num, i, j, carry;
