@@ -1,12 +1,36 @@
 #include <stdio.h>
 
+#define MAX_DIGITS 500 // número máximo de dígitos para armazenar o fatorial
+
 int main() {
-    int num, i, fat = 1;
+    int num, i, j, carry;
+    unsigned long long int result[MAX_DIGITS] = {0};
+
     printf("Digite um numero inteiro positivo: ");
     scanf("%d", &num);
+
+    result[0] = 1; // inicializa o resultado com 1
+
     for (i = 2; i <= num; i++) {
-        fat *= i;
+        // Multiplica o resultado por i e armazena o resultado em result
+        carry = 0;
+        for (j = 0; j < MAX_DIGITS; j++) {
+            result[j] = result[j] * i + carry;
+            carry = result[j] / 10;
+            result[j] %= 10;
+        }
     }
-    printf("O fatorial de %d eh %d\n", num, fat);
+
+    // Encontra o índice do dígito mais significativo
+    int index = MAX_DIGITS - 1;
+    while (index > 0 && result[index] == 0) {
+        index--;
+    }
+
+    printf("O fatorial de %d eh ", num);
+    for (i = index; i >= 0; i--) {
+        printf("%d", result[i]);
+    }
+    printf("\n");
     return 0;
 }
